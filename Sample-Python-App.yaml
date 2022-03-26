@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: my-python-app
-        image: devopsaks20/python-app:v1
+        image: devopsaks20/python-app-ci-cd:tag
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
