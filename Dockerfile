@@ -7,7 +7,7 @@ RUN apk add --update py2-pip
 # install Python modules needed by the Python app
 COPY requirements.txt /usr/src/app/
 #RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
-RUN pip install --trusted-host pypi.python.org --no-cache-dir -r /usr/src/app/requirements.txt
+RUN pip install --upgrade pip --trusted-host pypi.python.org Flask==3.0.3
 
 # copy files required for the app to run
 COPY app.py /usr/src/app/
