@@ -1,22 +1,21 @@
-# this is my base image
-FROM alpine:3.5
+# Use a Python 3 base image
+FROM python:3.9-slim
 
-# Install python and pip
-RUN apk add --update py2-pip
+# Install pip (already included in Python 3 image)
+# RUN pip install --upgrade pip  # No need for upgrade if using a recent image
 
-# install Python modules needed by the Python app
-COPY requirements.txt /usr/src/app/
-#RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
-RUN pip install --upgrade pip
-RUN pip install --trusted-host pypi.python.org Flask==3.0.3
+# Install Python modules
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
 
-# copy files required for the app to run
+# Copy application files
 COPY app.py /usr/src/app/
 COPY index.html /usr/src/app/templates/
 COPY styles.css /usr/src/app/templates/
 
-# tell the port number the container should expose
+# Expose port
 EXPOSE 5000
 
-# run the application
+# Run the application
 CMD ["python", "/usr/src/app/app.py"]
+
